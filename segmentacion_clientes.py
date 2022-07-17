@@ -2,6 +2,11 @@ import json
 from msilib.schema import Class
 import sys
 import validacion_json
+from jinja2 import Environment, PackageLoader, select_autoescape
+env = Environment(
+    loader=PackageLoader("paquete"),
+    autoescape=select_autoescape()
+)
 
 class Direccion:
 
@@ -132,6 +137,10 @@ validacion_json.json_validator(argumen[1])
 
 with open(argumen[1], 'r') as j:
      contents = json.loads(j.read())
+
+template = env.get_template("template.html")
+with open('reporte.html', 'w') as file:
+    file.write(template.render())
 
 direccion = contents['direccion']
 
