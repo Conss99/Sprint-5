@@ -140,7 +140,7 @@ with open(argumen[1], 'r') as j:
 
 template = env.get_template("template.html")
 with open('reporte.html', 'w') as file:
-    file.write(template.render())
+    file.write(template.render(contents=contents))
 
 direccion = contents['direccion']
 

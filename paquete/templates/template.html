@@ -13,6 +13,7 @@
   <body>
     <div class="container">
         <h1>Reporte de transacciones</h1>
+<<<<<<< Updated upstream
         <h2>Clientes Classic</h2>
         <br>
         <h3>{{tps_classic.nombre}} {{tps_classic.apellido}}</h3>
@@ -43,6 +44,41 @@
             </table>
         <br>
 
+=======
+        <br>
+
+        <h2>Clientes Classic</h2>
+        <br>
+        <h3>{{contents.nombre}} {{contents.apellido}}</h3>
+        <h5>{{tps_classic.direccion.calle}} {{tps_classic.direccion.numero}}</h5>
+        <h5>{{tps_classic.direccion.ciudad}}, {{tps_classic.direccion.provincia}}, {{tps_classic.direccion.pais}}</h5>
+        <h5>DNI: {{tps_classic.dni}}</h3>
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Monto</th>
+                    <th scope="col">Razon</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for transaccion in tps_classic.transacciones %}
+                <tr>
+                    <td>{{transaccion.fecha}}</td>
+                    <td>{{transaccion.tipo}}</td>
+                    <td>{{transaccion.estado}}</td>
+                    <td>{{transaccion.monto}}</td>
+                    <td>PLACEHOLDER PARA RAZON</td>
+                </tr>
+            {% endfor %}
+            </table>
+        <!-- Gold -->
+        <br>
+    
+>>>>>>> Stashed changes
     </div>
     
 
