@@ -152,7 +152,7 @@ def json_validator(name):
     with open(name, 'r') as file:
         transacciones = json.load(file)
         try:
-            validate(instance=transacciones, schema=schema)
+            validate(instance=transacciones, schema = schema)
         except ValidationError as e:
             print("ERROR: Revise bien el formato del JSON!", e)
             sys.exit()

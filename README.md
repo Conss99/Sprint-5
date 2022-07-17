@@ -1,7 +1,14 @@
 # Sprint-5
 
-
   El archivo segmentacion_clientes.py hay que ejecutarlo desde una termina ly trabaja con 2 argumentos, el primero como habitualmente es seria el nombre del .py y el segundo el nombre del json, ej. segmentacion_clientes.py eventos_black.json.
+
+  Requerimientos:
+- Python 3.9.x
+- Modulos a importar: json, msilib, sys, jsonschema
+- Como importar los modulos:
+    Desde la terminar escribir los siguientes comandos:
+    python -m venv env
+    python -m pip install [nombre_modulo]
 
 Nota sobre el diagrama de clases:
 -Eliminamos las clases: cuenta, classic, gold, black y razon. A continuacion el porque.
