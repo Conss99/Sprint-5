@@ -13,101 +13,36 @@
   <body>
     <div class="container">
         <h1>Reporte de transacciones</h1>
-    <br>
+        <h2>Clientes Classic</h2>
+        <br>
+        <h3>{{tps_classic.nombre}} {{tps_classic.apellido}}</h3>
+        <h5>{{tps_classic.direccion.calle}} {{tps_classic.direccion.numero}}</h5>
+        <h5>{{tps_classic.direccion.ciudad}}, {{tps_classic.direccion.provincia}}, {{tps_classic.direccion.pais}}</h5>
+        <h5>DNI: {{tps_classic.dni}}</h3>
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Monto</th>
+                    <th scope="col">Razon</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for transaccion in tps_classic.transacciones %}
+                <tr>
+                    <td>{{transaccion.fecha}}</td>
+                    <td>{{transaccion.tipo}}</td>
+                    <td>{{transaccion.estado}}</td>
+                    <td>{{transaccion.monto}}</td>
+                    <td>PLACEHOLDER PARA RAZON</td>
+                </tr>
+            {% endfor %}
+            </table>
+        <br>
 
-    <!-- Classic -->
-
-    <h2>Clientes Classic</h2>
-    <br>
-    <h3>{{tps_classic.nombre}} {{tps_classic.apellido}}</h3>
-    <h5>{{tps_classic.direccion.calle}} {{tps_classic.direccion.numero}}</h5>
-    <h5>{{tps_classic.direccion.ciudad}}, {{tps_classic.direccion.provincia}}, {{tps_classic.direccion.pais}}</h5>
-    <h5>DNI: {{tps_classic.dni}}</h3>
-    <br>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Fecha</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Monto</th>
-                <th scope="col">Razon</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for transaccion in tps_classic.transacciones %}
-            <tr>
-                <td>{{transaccion.fecha}}</td>
-                <td>{{transaccion.tipo}}</td>
-                <td>{{transaccion.estado}}</td>
-                <td>{{transaccion.monto}}</td>
-                <td>PLACEHOLDER PARA RAZON</td>
-            </tr>
-        {% endfor %}
-        </table>
-    <!-- Gold -->
-    <br>
-    <h2>Clientes Gold</h2>
-    <br>
-    <h3>{{tps_gold.nombre}} {{tps_gold.apellido}}</h3>
-    <h5>{{tps_gold.direccion.calle}} {{tps_gold.direccion.numero}}</h5>
-    <h5>{{tps_gold.direccion.ciudad}}, {{tps_gold.direccion.provincia}}, {{tps_gold.direccion.pais}}</h5>
-    <h5>DNI: {{tps_gold.dni}}</h3>
-    <br>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Fecha</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Monto</th>
-                <th scope="col">Razon</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for transaccion in tps_gold.transacciones %}
-            <tr>
-                <td>{{transaccion.fecha}}</td>
-                <td>{{transaccion.tipo}}</td>
-                <td>{{transaccion.estado}}</td>
-                <td>{{transaccion.monto}}</td>
-                <td>PLACEHOLDER PARA RAZON</td>
-            </tr>
-        {% endfor %}
-        </table>
-    <!-- Black -->
-    <br>
-    <h2>Clientes Black</h2>
-    <br>
-    <h3>{{tps_black.nombre}} {{tps_black.apellido}}</h3>
-    <h5>{{tps_black.direccion.calle}} {{tps_black.direccion.numero}}</h5>
-    <h5>{{tps_black.direccion.ciudad}}, {{tps_black.direccion.provincia}}, {{tps_black.direccion.pais}}</h5>
-    <h5>DNI: {{tps_black.dni}}</h3>
-    <br>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Fecha</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Monto</th>
-                <th scope="col">Razon</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for transaccion in tps_black.transacciones %}
-            <tr>
-                <td>{{transaccion.fecha}}</td>
-                <td>{{transaccion.tipo}}</td>
-                <td>{{transaccion.estado}}</td>
-                <td>{{transaccion.monto}}</td>
-                <td>PLACEHOLDER PARA RAZON</td>
-            </tr>
-        {% endfor %}
-        </table>
-        </tbody>
-
-    </table>
     </div>
     
 

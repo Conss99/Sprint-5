@@ -1,7 +1,7 @@
 import json
 from msilib.schema import Class
 import sys
-import validacion_json
+# import validacion_json
 from jinja2 import Environment, PackageLoader, select_autoescape
 env = Environment(
     loader=PackageLoader("paquete"),
@@ -133,7 +133,7 @@ class Cliente:
 
 argumen = sys.argv
 
-validacion_json.json_validator(argumen[1])
+# validacion_json.json_validator(argumen[1])
 
 with open(argumen[1], 'r') as j:
      contents = json.loads(j.read())
