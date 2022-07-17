@@ -6,9 +6,9 @@
 - Python 3.9.x
 - Modulos a importar: json, msilib, sys, jsonschema
 - Como importar los modulos:
-    Desde la terminar escribir los siguientes comandos:
-    python -m venv env
-    python -m pip install [nombre_modulo]
+    --Desde la terminar escribir los siguientes comandos:
+    --python -m venv env
+    --python -m pip install [nombre_modulo]
 
 Nota sobre el diagrama de clases:
 -Eliminamos las clases: cuenta, classic, gold, black y razon. A continuacion el porque.
