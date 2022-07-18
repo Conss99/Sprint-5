@@ -1,7 +1,6 @@
 import json
 import sys
 import validacion_json
-
 from jsonschema import ValidationError, validate
 from jinja2 import Environment, PackageLoader, select_autoescape
 
@@ -103,23 +102,24 @@ class Cliente:
                 
                 if self.tipo_cliente.lower() == 'classic':
                     una_transaccion.razon = 'El tipo de cliente no puede tener una tarjeta de credito'
-                else:
+                else: # gold y black
                     if not self.puede_crear_tarjeta_credito(una_transaccion.tarjetas_credito):
                         una_transaccion.razon = 'Cantidad maxima de tarjetas de credito posibles'
 
 
             elif una_transaccion.tipo_transaccion == 'ALTA_CHEQUERA':
+                
                 if self.tipo_cliente.lower() == 'classic':
                     una_transaccion.razon = 'El tipo de cliente no puede tener una chequera'
-                else:
+                else:  # gold y black
                     if not self.puede_crear_chequera(una_transaccion.chequeras):
-                        una_transaccion.razon = 'Cantidad maxima de tarjetas de credito posibles'
+                        una_transaccion.razon = 'Cantidad maxima de chequeras posibles'
 
 
             elif una_transaccion.tipo_transaccion == 'COMPRA_DOLAR':
-                if not self.puede_comprar_dolar():
+                if not self.puede_comprar_dolar(): # clasic
                     una_transaccion.razon = 'El tipo de cliente no puede comprar dolares'
-                else:
+                else: # black y gold
                     if (una_transaccion.monto > una_transaccion.saldo_en_cuenta):
                         una_transaccion.razon = 'El monto que quiso comprar es mayor que el saldo disponible en la cuenta'
                     elif una_transaccion.monto > una_transaccion.cupo_diario_restante:
@@ -140,19 +140,20 @@ class Cliente:
 
     #-------------------------------------------------------------------------------------------#
 
-def json_validator(name):
-    with open(name, 'r') as file:
-        transacciones = json.load(file)
-        try:
-            validate(instance=transacciones, schema = schema)
-        except ValidationError as e:
-            print("ERROR: Revise bien el formato del JSON!", e)
-            sys.exit()
+# No pudimos hacer funcionar el validador de json a la hora de testearlo, pero esta planteado de igual forma a la que funciono en otro momento.
+
+# def json_validator(name):
+#     with open(name, 'r') as file:
+#         transacciones = json.load(file)
+#         try:
+#             validate(instance=transacciones, schema = schema)
+#         except ValidationError as e:
+#             print("ERROR: Revise bien el formato del JSON!", e)
+#             sys.exit()
 
 
-#------------------------------------------------------------
 argumen = sys.argv
-validacion_json.json_validator(argumen[1])
+# validacion_json.json_validator(argumen[1])
 
 with open(argumen[1], 'r') as j:
     contents = json.loads(j.read())
