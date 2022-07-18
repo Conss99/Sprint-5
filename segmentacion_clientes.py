@@ -1,5 +1,4 @@
 import json
-from msilib.schema import Class
 import sys
 # import validacion_json
 from jinja2 import Environment, PackageLoader, select_autoescape
@@ -139,8 +138,7 @@ with open(argumen[1], 'r') as j:
      contents = json.loads(j.read())
 
 template = env.get_template("template.html")
-with open('reporte.html', 'w') as file:
-    file.write(template.render(contents=contents))
+
 
 direccion = contents['direccion']
 
@@ -150,4 +148,7 @@ for i in contents['transacciones']:
     v = Transaccion(i['estado'],i['tipo'],i['cuentaNumero'],i['cupoDiarioRestante'],i['monto'],i['fecha'],i['numero'],i['saldoEnCuenta'],i['totalTarjetasDeCreditoActualmente'],i['totalChequerasActualmente'])
     cliente.añadir_transacciones(v)
 
+
+with open('reporte.html', 'w') as file:
+    file.write(template.render(contents=cliente))
 

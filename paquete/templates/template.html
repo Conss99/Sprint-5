@@ -19,6 +19,8 @@
         <h5>{{contents.direccion.calle}} {{contents.direccion.numero}}</h5>
         <h5>{{contents.direccion.ciudad}}, {{contents.direccion.provincia}}, {{contents.direccion.pais}}</h5>
         <h5>DNI: {{contents.dni}}</h3>
+        <h5>Numero de cuenta: {{contents.cuentaNumero}}</h5>
+
         <br>
         <table class="table">
             <thead>
@@ -31,15 +33,18 @@
                 </tr>
             </thead>
             <tbody>
-            {% for transaccion in contents.transacciones %}
+            {% for transaccion in contents.transacciones %}      
                 <tr>
-                    <td>{{contents.fecha}}</td>
-                    <td>{{contents.tipo}}</td>
-                    <td>{{contents.estado}}</td>
-                    <td>{{contents.monto}}</td>
-                    <td>PLACEHOLDER PARA RAZON</td>
+                    <td>{{transaccion.fecha}}</td>
+                    <td>{{transaccion.tipo_transaccion}}</td>
+                    <td>{{transaccion.estado}}</td>
+                    <td>{{transaccion.monto}}</td>                
+                    <td>{{transaccion.razon}}</td>
+                    
+                    <td></td>
                 </tr>
             {% endfor %}
+            
             </table>
         <br>
 
