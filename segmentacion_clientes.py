@@ -136,8 +136,7 @@ class Cliente:
             elif una_transaccion.tipo_transaccion == 'TRANSFERENCIA_RECIBIDA':
                 una_transaccion.razon = 'La transferencia supera el monto de transferencia recibida sin autorizacion previa'
         
-        else:
-            self.transacciones.append(una_transaccion)
+        self.transacciones.append(una_transaccion)
 
     #-------------------------------------------------------------------------------------------#
 
