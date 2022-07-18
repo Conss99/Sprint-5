@@ -1,6 +1,6 @@
 # Sprint-5
 
-  El archivo segmentacion_clientes.py hay que ejecutarlo desde una termina ly trabaja con 2 argumentos, el primero como habitualmente es seria el nombre del .py y el segundo el nombre del json, ej. segmentacion_clientes.py eventos_black.json.
+  El archivo segmentacion_clientes.py hay que ejecutarlo desde una terminal y trabaja con 2 argumentos, el primero como habitualmente es seria el nombre del .py y el segundo el nombre del json, ej. segmentacion_clientes.py eventos_black.json.
 
   Requerimientos:
 - Python 3.9.x
