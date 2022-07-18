@@ -10,6 +10,7 @@
 Desde la terminar escribir los siguientes comandos:
 - python -m venv env
 - python -m pip install [nombre_modulo]
+- env/Scripts/activate
 
 Nota sobre el diagrama de clases:
 
