@@ -1,7 +1,14 @@
 import json
 import sys
 import validacion_json
+
 from jsonschema import ValidationError, validate
+from jinja2 import Environment, PackageLoader, select_autoescape
+
+env = Environment(
+    loader = PackageLoader("paquete"),
+    autoescape = select_autoescape()
+)
 
 class Direccion:
     def __init__(self, calle, numero, ciudad, provincia, pais):
@@ -144,8 +151,9 @@ def json_validator(name):
             sys.exit()
 
 
+#------------------------------------------------------------
 argumen = sys.argv
-validacion.json_validator(argumen[1])
+validacion_json.json_validator(argumen[1])
 
 with open(argumen[1], 'r') as j:
     contents = json.loads(j.read())
@@ -159,3 +167,9 @@ for i in contents['transacciones']:
     v = Transaccion(i['estado'], i['tipo'], i['cuentaNumero'], i['cupoDiarioRestante'], i['monto'], i['fecha'],
                     i['numero'], i['saldoEnCuenta'], i['totalTarjetasDeCreditoActualmente'], i['totalChequerasActualmente'])
     cliente.añadir_transacciones(v)
+#------------------------------------------------------------
+
+template = env.get_template("template.html")
+
+with open('reporte.html', 'w') as file:
+    file.write(template.render(contents=cliente))
