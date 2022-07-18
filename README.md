@@ -5,7 +5,7 @@
   Requerimientos:
 - Python 3.9.x
 - Modulos a importar: json, msilib, sys, jsonschema
-- Como importar los modulos:
+##Como importar los modulos:
 Desde la terminar escribir los siguientes comandos:
 python -m venv env
 python -m pip install [nombre_modulo]
