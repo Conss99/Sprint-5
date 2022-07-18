@@ -1,9 +1,7 @@
 import json
-from msilib.schema import Class
 import sys
-from jsonschema import validacion_json
+import validacion_json
 from jsonschema import ValidationError, validate
-
 
 class Direccion:
     def __init__(self, calle, numero, ciudad, provincia, pais):
@@ -46,12 +44,9 @@ class Cliente:
         self.transacciones = []
 
     def __str__(self):
-        v = 'Cliente {}  -   Numero de cliente: {}   Nombre y Apellido: {} {}   DNI: {} \nDireccion: {} \n  \n\tTransacciones: '.format(
-            self.tipo_cliente, self.numero_Cliente, self.nombre, self.apellido, self.dni, self.direccion)
-        c = 0
+        v = 'Cliente {}  -   Numero de cliente: {}   Nombre y Apellido: {} {}   DNI: {} \nDireccion: {} \n  \n\tTransacciones: '.format(self.tipo_cliente, self.numero_Cliente, self.nombre, self.apellido, self.dni, self.direccion)
         for i in self.transacciones:
-            v += '\n\n{}'.format(self.transacciones[c])
-            c += 1
+            v += '\n\n{}'.format(self.transacciones[i])
         return v
 
     #-------------------------------------------------------------------------------------------#
@@ -74,7 +69,9 @@ class Cliente:
         return band
 
     def añadir_transacciones(self, una_transaccion):
+        
         if una_transaccion.estado.lower() == 'rechazada':
+
 
             if una_transaccion.tipo_transaccion == 'RETIRO_EFECTIVO_CAJERO_AUTOMATICO':
                 if self.tipo_cliente.lower() == 'classic':
@@ -85,7 +82,7 @@ class Cliente:
                     else:
                         una_transaccion.razon = 'El monto que quiso extraer es mayor que el cupo diario restante para extraer y el saldo disponible de la cuenta'
 
-                else:
+                else: # gold y black
                     if una_transaccion.saldo_en_cuenta >= -10000:
                         if (una_transaccion.monto > una_transaccion.saldo_en_cuenta):
                             una_transaccion.razon = 'El monto que quiso extraer es mayor que el saldo disponible en la cuenta'
@@ -94,12 +91,15 @@ class Cliente:
                         else:
                             una_transaccion.razon = 'El monto que quiso extraer es mayor que el cupo diario restante para extraer y el saldo disponible de la cuenta'
 
+
             elif una_transaccion.tipo_transaccion == 'ALTA_TARJETA_CREDITO':
+                
                 if self.tipo_cliente.lower() == 'classic':
                     una_transaccion.razon = 'El tipo de cliente no puede tener una tarjeta de credito'
                 else:
                     if not self.puede_crear_tarjeta_credito(una_transaccion.tarjetas_credito):
                         una_transaccion.razon = 'Cantidad maxima de tarjetas de credito posibles'
+
 
             elif una_transaccion.tipo_transaccion == 'ALTA_CHEQUERA':
                 if self.tipo_cliente.lower() == 'classic':
@@ -107,6 +107,7 @@ class Cliente:
                 else:
                     if not self.puede_crear_chequera(una_transaccion.chequeras):
                         una_transaccion.razon = 'Cantidad maxima de tarjetas de credito posibles'
+
 
             elif una_transaccion.tipo_transaccion == 'COMPRA_DOLAR':
                 if not self.puede_comprar_dolar():
@@ -117,22 +118,34 @@ class Cliente:
                     elif una_transaccion.monto > una_transaccion.cupo_diario_restante:
                         una_transaccion.razon = 'El monto que quiso comprar es mayor que el cupo diario restante para comprar de la cuenta'
 
+
             elif una_transaccion.tipo_transaccion == 'TRANSFERENCIA_ENVIADA':
                 if self.tipo_cliente.lower() == 'black':
                     una_transaccion.razon = 'El monto de la transferencia supera el monto disponible en la cuenta'
                 else:
                     una_transaccion.razon = 'El monto de la transferencia supera o iguala el monto disponible en la cuenta por lo tanto no puede pagar la comision por transaccion'
 
+
             elif una_transaccion.tipo_transaccion == 'TRANSFERENCIA_RECIBIDA':
                 una_transaccion.razon = 'La transferencia supera el monto de transferencia recibida sin autorizacion previa'
-
-        self.transacciones.append(una_transaccion)
+        
+        else:
+            self.transacciones.append(una_transaccion)
 
     #-------------------------------------------------------------------------------------------#
 
+def json_validator(name):
+    with open(name, 'r') as file:
+        transacciones = json.load(file)
+        try:
+            validate(instance=transacciones, schema = schema)
+        except ValidationError as e:
+            print("ERROR: Revise bien el formato del JSON!", e)
+            sys.exit()
+
 
 argumen = sys.argv
-validacion_json.json_validator(argumen[1])
+validacion.json_validator(argumen[1])
 
 with open(argumen[1], 'r') as j:
     contents = json.loads(j.read())
@@ -146,13 +159,3 @@ for i in contents['transacciones']:
     v = Transaccion(i['estado'], i['tipo'], i['cuentaNumero'], i['cupoDiarioRestante'], i['monto'], i['fecha'],
                     i['numero'], i['saldoEnCuenta'], i['totalTarjetasDeCreditoActualmente'], i['totalChequerasActualmente'])
     cliente.añadir_transacciones(v)
-
-
-def json_validator(name):
-    with open(name, 'r') as file:
-        transacciones = json.load(file)
-        try:
-            validate(instance=transacciones, schema = schema)
-        except ValidationError as e:
-            print("ERROR: Revise bien el formato del JSON!", e)
-            sys.exit()
