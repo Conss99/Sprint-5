@@ -4,7 +4,7 @@
 
   Requerimientos:
 - Python 3.9.x
-- Modulos a importar: json, msilib, sys, jsonschema
+- Modulos a importar: json, msilib, sys, jsonschema, jinja2
 
 ## Como importar los modulos:
 Desde la terminar escribir los siguientes comandos:
