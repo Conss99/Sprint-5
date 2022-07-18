@@ -13,35 +13,41 @@
   <body>
     <div class="container">
         <h1>Reporte de transacciones</h1>
-        <h2>Clientes Classic</h2>
+        <h2>Cliente tipo {{contents.tipo_cliente}}</h2>
         <br>
         <h3>{{contents.nombre}} {{contents.apellido}}</h3>
         <h5>{{contents.direccion.calle}} {{contents.direccion.numero}}</h5>
         <h5>{{contents.direccion.ciudad}}, {{contents.direccion.provincia}}, {{contents.direccion.pais}}</h5>
         <h5>DNI: {{contents.dni}}</h3>
-        <h5>Numero de cuenta: {{contents.cuentaNumero}}</h5>
 
         <br>
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Monto</th>
-                    <th scope="col">Razon</th>
+                    <th class="text-center" scope="col">Fecha</th>
+                    <th class="text-center" scope="col">Tipo</th>
+                    <th class="text-center" scope="col">Nro Cuenta</th>
+                    <th class="text-center" scope="col">Estado</th>
+                    <th class="text-center" scope="col">Monto</th>
+                    <th class="text-center" scope="col">Saldo</th>
+                    <th class="text-center" scope="col">Total Tarjetas de Credito</th>
+                    <th class="text-center" scope="col">Total Chequeras</th>
+                    <th class="text-center" scope="col">Razon</th>
+                    
                 </tr>
             </thead>
             <tbody>
             {% for transaccion in contents.transacciones %}      
                 <tr>
-                    <td>{{transaccion.fecha}}</td>
-                    <td>{{transaccion.tipo_transaccion}}</td>
-                    <td>{{transaccion.estado}}</td>
-                    <td>{{transaccion.monto}}</td>                
-                    <td>{{transaccion.razon}}</td>
-                    
-                    <td></td>
+                    <td class="text-center">{{transaccion.fecha}}</td>
+                    <td class="text-center">{{transaccion.tipo_transaccion}}</td>
+                    <td class="text-center">{{transaccion.cuenta_Numero}}</td> 
+                    <td class="text-center">{{transaccion.estado}}</td>
+                    <td class="text-center">{{transaccion.monto}}</td>
+                    <td class="text-center">{{transaccion.saldo_en_cuenta}}</td> 
+                    <td class="text-center">{{transaccion.tarjetas_credito}}</td> 
+                    <td class="text-center">{{transaccion.chequeras}}</td>                 
+                    <td class="text-center">{{transaccion.razon}}</td>               
                 </tr>
             {% endfor %}
             

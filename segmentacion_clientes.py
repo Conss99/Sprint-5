@@ -152,3 +152,5 @@ for i in contents['transacciones']:
 with open('reporte.html', 'w') as file:
     file.write(template.render(contents=cliente))
 
+
+
